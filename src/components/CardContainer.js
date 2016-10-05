@@ -14,7 +14,7 @@ class CardContainer extends Component {
 
   componentWillMount() {
     // Load the sound file
-    this.whoosh = new Sound('rasta-horn.mp3', Sound.MAIN_BUNDLE, (error) => {
+    this.whoosh = new Sound('rasta_horn.mp3', Sound.MAIN_BUNDLE, (error) => {
       if (error) {
         console.log('Failed to load the sound', error);
       } else {
@@ -72,7 +72,15 @@ const styles = {
     flex: 1,
     height: 260,
     margin: 20,
-    borderRadius: 12
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderBottomWidth: 0,
+    shadowColor: '#000',
+    shadowOffset: { width: 3, height: 3 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 1
   },
   cardFull: {
     position: 'absolute',
