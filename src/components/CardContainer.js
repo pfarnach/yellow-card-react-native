@@ -3,13 +3,15 @@ import {
   Text,
   View,
   TouchableOpacity,
-  LayoutAnimation
+  Animated,
+  Easing
 } from 'react-native';
 import Sound from 'react-native-sound';
 
 class CardContainer extends Component {
   state = {
-    selected: null
+    selected: null,
+    posAnim: new Animated.Value(1000)
   }
 
   componentWillMount() {
@@ -23,17 +25,27 @@ class CardContainer extends Component {
     });    
   }
 
-  componentWillUpdate() {
-    LayoutAnimation.easeInEaseOut();
-  }
-
   selectCard(color = null) {
     this.whoosh.play();
     this.setState({ selected: color });
+
+    // Trigger animation
+    Animated.timing(
+      this.state.posAnim, 
+      {
+        toValue: 10,
+      }
+    ).start();
   }
 
   resetSelect() {
-    this.setState({ selected: null });
+    this.whoosh.stop();
+
+    // Reset animation starting position state
+    this.setState({
+      selected: null,
+      posAnim: new Animated.Value(1000)
+    });
   }
 
   renderMain() {
@@ -51,9 +63,11 @@ class CardContainer extends Component {
 
   renderFullCard(color) {
     return (
-      <TouchableOpacity style={ [styles[color], styles.cardFull] } onPress={this.resetSelect.bind(this) }>
-        <View />
-      </TouchableOpacity>
+      <Animated.View style={ [styles[color], styles.cardFull, { top: this.state.posAnim }] }>
+        <TouchableOpacity style={{ flex: 1 }} onPress={this.resetSelect.bind(this) }>
+          <View />
+        </TouchableOpacity>
+      </Animated.View>
     )
   }
 
@@ -84,7 +98,6 @@ const styles = {
   },
   cardFull: {
     position: 'absolute',
-    top: 10,
     left: 0,
     bottom: 0,
     right: 0,
