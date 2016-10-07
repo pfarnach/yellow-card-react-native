@@ -4,11 +4,22 @@ import Header from './components/Header';
 import CardContainer from './components/CardContainer';
 
 class App extends Component {
+  state = {
+    selected: null
+  }
+
+  updateSelected(color) {
+    this.setState({ selected: color });
+  }
+
   render() {
     return (
       <View style={ styles.container }>
-        <Header />
-        <CardContainer />
+        { this.state.selected ? null : <Header /> }
+        <CardContainer
+          selected={ this.state.selected } 
+          updateSelected={ color => this.updateSelected(color) }
+        />
       </View>
     );
   }
