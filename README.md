@@ -6,5 +6,6 @@
 
 ## To-do
 
-* Add Android compatibility 
-* Improve animations
+* ~~Add Android compatibility~~
+* ~~Improve animations~~
+* Deploy
