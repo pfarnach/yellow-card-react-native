@@ -6,6 +6,5 @@
 
 
 ## Screenshots
-![screenshot](./src/assets/screenshot1.png =250x)
-
-![screenshot](./src/assets/screenshot2.png =250x)
+<img src="./src/assets/screenshot1.png" width="200">
+<img src="./src/assets/screenshot2.png" width="200">
